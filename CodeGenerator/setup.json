@@ -1,0 +1,21 @@
+{
+    "database": {
+        "host": "localhost",
+        "port": 5000,
+        "username": "postgres",
+        "password": "toavina",
+        "database_name": "grh"
+    },
+    "paths": {
+        "project": "D:/S6/code/spring mvc/test_projet",
+        "model": "D:/S6/code/spring mvc/test_projet/src/main/java/com/example/test_projet/model",
+        "controller": "D:/S6/code/spring mvc/test_projet/src/main/java/com/example/test_projet/controller",
+        "repository": "D:/S6/code/spring mvc/test_projet/src/main/java/com/example/test_projet/repositorie",
+        "view": "D:/S6/code/spring mvc/test_projet/src/main/webapp/views"
+    },
+    "package": {
+        "model": "com.example.test_projet.model",
+        "controller": "com.example.test_projet.controller",
+        "repository": "com.example.test_projet.repositorie"
+    }
+}

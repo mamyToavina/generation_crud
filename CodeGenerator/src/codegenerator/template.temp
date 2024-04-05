@@ -1,0 +1,21 @@
+package [packageName];
+[importSpace];
+
+@Entity
+public class [className] [extends] {
+    [annotationFields]
+    private [fieldsType] [fieldsName];
+
+    public [className](){
+	[valueDeclarationConstructor];
+    }
+
+    public [fieldsType] get[fieldsName]{
+	[valueDeclarationGetters]
+    }
+
+    public void set[fieldsName]([fieldsType] [fieldsNameNotCapitalized]{
+	[valueDeclarationSetters]
+    }
+
+}

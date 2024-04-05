@@ -1,0 +1,14 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>Formulaire [classNameLower]</title>
+</head>
+<body>
+    <h1>Formulaire [classNameLower]</h1>
+    <form action="/[classNameLower]/create" method="post">
+	[inputDeclaration]
+        <br/>
+        <input type="submit" value="Enregistrer" />
+    </form>
+</body>
+</html>

@@ -1,0 +1,12 @@
+[label]: <select name="id_service">
+        <%
+            List<[className]> [classNameLower]s = (List<[className]>) request.getAttribute("[classNameLower]s");
+            if ([classNameLower]s != null) {
+                for ([className] [classNameLower] : [classNameLower]s) {
+        %>
+                    <option value="<%= [classNameLower].getId() %>"><%= [classNameLower].[methodLabel] %></option>
+        <%
+                }
+            }
+        %>
+        </select>

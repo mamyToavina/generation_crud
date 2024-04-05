@@ -1,0 +1,35 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="java.util.List" %>
+<%@ page import="[packageModel].[classNameLower].[className]" %>
+
+<html>
+<head>
+    <title>Liste [classNameLower]</title>
+</head>
+<body>
+    <h1>Liste [classNameLower]</h1>
+    <table border="1">
+        <tr>
+         [theadDeclaration]
+	</tr>
+        <%
+            List<[className]> [classNameLower]s = (List<[className]>) request.getAttribute("[classNameLower]s");
+            if ([classNameLower]s != null) {
+                for ([className] [classNameLower] : [classNameLower]s) {
+        %>
+	   
+        <tr>
+		[tdDeclaration]
+                <td>
+                    <a href="/[classNameLower]/update_form/<%= [classNameLower].getId() %>">Modifier</a>
+                    <a href="/[classNameLower]/delete/<%= [classNameLower].getId() %>">Supprimer</a>
+                </td>
+        </tr>
+        <%
+                }
+            }
+        %>
+    </table>
+    <a href="/[classNameLower]/insert_form">Ajouter un nouvel étudiant</a>
+</body>
+</html>

@@ -1,0 +1,61 @@
+package [packageName].[classNameLower];
+
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import [packageModel].[classNameLower].[className];
+import [packageRepository].[classNameLower].[className]Repository;
+import java.util.List;
+[importSpace]
+[importRepository]
+@Controller
+@RequestMapping("/[classNameLower]")
+public class [className]Controller {
+    @Autowired
+    private [className]Repository [classNameLower]Repository;
+    [otherRepositoryDeclaration]
+
+    @GetMapping("/insert_form")
+    public String insert_form(Model model) {
+	[passageVariable]
+	model.addAttribute("[classNameLower]", new [className]());
+        return "[classNameLower]/Insert";
+    }
+
+    @GetMapping("/update_form")
+    public String update_form(@PathVariable Long id, Model model) {
+	[className] [classNameLower] = [classNameLower]Repository.findById(id).orElse(null);
+	model.addAttribute("[classNameLower]s",[classNameLower]);
+        return "[classNameLower]/update_form";
+    }
+
+    @GetMapping("/get_all")
+    public String get_all(Model model) {
+        List<[className]> list = [classNameLower]Repository.findAll();
+        model.addAttribute("[classNameLower]s", list);
+        return "[classNameLower]/Liste";
+    }
+    
+    @PostMapping("/create")
+    public String create(@ModelAttribute [className] [classNameLower]) {
+        [classNameLower]Repository.save([classNameLower]);
+        return "redirect:/get_all";
+    }
+
+    @PostMapping("/update")
+    public String update(@ModelAttribute [className] [classNameLower]) {
+        [classNameLower]Repository.save([classNameLower]);
+        return "redirect:/get_all";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable("id") [typeId] id) {
+        [classNameLower]Repository.deleteById(id);
+        return "redirect:/get_all";
+    }
+}

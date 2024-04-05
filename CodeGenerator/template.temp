@@ -1,0 +1,25 @@
+package [packageName].[classNameLower];
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+[importSpace]
+
+@Entity
+public class [className]{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    [fieldsDeclaration]
+
+    public [className](){
+    }
+
+    public [className]([argsDeclaration]){
+       [constructorDeclaration]
+    }
+    
+    [gettersDeclaration]
+    [settersDeclaration]
+
+}

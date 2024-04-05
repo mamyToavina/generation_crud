@@ -1,0 +1,11 @@
+package [packageName].[classNameLower];
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import [packageModel].[classNameLower].[className];
+[importSpace]
+
+@Repository
+public interface [className]Repository extends JpaRepository<[className], [typeId]>{
+    
+}

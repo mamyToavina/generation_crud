@@ -1,0 +1,317 @@
+[
+    {
+        "id": 1,
+        "nom": "postgresql",
+        "types": {
+            "smallint": {
+                "type": "int",
+                "import": ""
+            },
+            "varchar": {
+                "type": "String",
+                "import": ""
+            },
+            "serial": {
+                "type": "Long",
+                "import": "java.lang.Long"
+            },
+            "integer": {
+                "type": "int",
+                "import": ""
+            },
+            "bigint": {
+                "type": "long",
+                "import": "java.lang.Long"
+            },
+            "bigserial": {
+                "type": "Long",
+                "import": "java.lang.Long"
+            },
+            "real": {
+                "type": "float",
+                "import": ""
+            },
+            "double precision": {
+                "type": "double",
+                "import": ""
+            },
+            "numeric": {
+                "type": "BigDecimal",
+                "import": "java.math.BigDecimal"
+            },
+            "decimal": {
+                "type": "BigDecimal",
+                "import": "java.math.BigDecimal"
+            },
+            "character varying": {
+                "type": "String",
+                "import": ""
+            },
+            "character": {
+                "type": "String",
+                "import": ""
+            },
+            "text": {
+                "type": "String",
+                "import": ""
+            },
+            "date": {
+                "type": "Date",
+                "import": "java.util.Date"
+            },
+            "time without time zone": {
+                "type": "Time",
+                "import": "java.sql.Time"
+            },
+            "time with time zone": {
+                "type": "Time",
+                "import": "java.sql.Time"
+            },
+            "timestamp without time zone": {
+                "type": "Timestamp",
+                "import": "java.sql.Timestamp"
+            },
+            "timestamp with time zone": {
+                "type": "Timestamp",
+                "import": "java.sql.Timestamp"
+            },
+            "interval": {
+                "type": "String",
+                "import": ""
+            },
+            "boolean": {
+                "type": "boolean",
+                "import": "java.lang.Boolean"
+            },
+            "uuid": {
+                "type": "UUID",
+                "import": "java.util.UUID"
+            },
+            "json": {
+                "type": "String",
+                "import": ""
+            },
+            "jsonb": {
+                "type": "String",
+                "import": ""
+            },
+            "bytea": {
+                "type": "byte[]",
+                "import": "java.lang.byte[]"
+            }
+        }
+    },
+    {
+        "id": 2,
+        "nom": "mysql",
+        "types": {
+            "tinyint": {
+                "type": "byte",
+                "import": "java.lang.Byte"
+            },
+            "smallint": {
+                "type": "short",
+                "import": "java.lang.Short"
+            },
+            "mediumint": {
+                "type": "int",
+                "import": "java.lang.Integer"
+            },
+            "int": {
+                "type": "int",
+                "import": "java.lang.Integer"
+            },
+            "bigint": {
+                "type": "long",
+                "import": "java.lang.Long"
+            },
+            "float": {
+                "type": "float",
+                "import": "java.lang.Float"
+            },
+            "double": {
+                "type": "double",
+                "import": "java.lang.Double"
+            },
+            "decimal": {
+                "type": "BigDecimal",
+                "import": "java.math.BigDecimal"
+            },
+            "char": {
+                "type": "String",
+                "import": "java.lang.String"
+            },
+            "varchar": {
+                "type": "String",
+                "import": "java.lang.String"
+            },
+            "text": {
+                "type": "String",
+                "import": "java.lang.String"
+            },
+            "date": {
+                "type": "Date",
+                "import": "java.util.Date"
+            },
+            "time": {
+                "type": "Time",
+                "import": "java.sql.Time"
+            },
+            "timestamp": {
+                "type": "Timestamp",
+                "import": "java.sql.Timestamp"
+            },
+            "datetime": {
+                "type": "Timestamp",
+                "import": "java.sql.Timestamp"
+            },
+            "year": {
+                "type": "short",
+                "import": "java.lang.Short"
+            },
+            "tinytext": {
+                "type": "String",
+                "import": "java.lang.String"
+            },
+            "mediumtext": {
+                "type": "String",
+                "import": "java.lang.String"
+            },
+            "longtext": {
+                "type": "String",
+                "import": "java.lang.String"
+            },
+            "binary": {
+                "type": "byte[]",
+                "import": "java.lang.byte[]"
+            },
+            "varbinary": {
+                "type": "byte[]",
+                "import": "java.lang.byte[]"
+            },
+            "tinyblob": {
+                "type": "byte[]",
+                "import": "java.lang.byte[]"
+            },
+            "mediumblob": {
+                "type": "byte[]",
+                "import": "java.lang.byte[]"
+            },
+            "blob": {
+                "type": "byte[]",
+                "import": "java.lang.byte[]"
+            },
+            "longblob": {
+                "type": "byte[]",
+                "import": "java.lang.byte[]"
+            },
+            "enum": {
+                "type": "String",
+                "import": "java.lang.String"
+            },
+            "set": {
+                "type": "String",
+                "import": "java.lang.String"
+            }
+        }
+        
+    },
+    {
+        "id": 3,
+        "nom": "oracle",
+        "types": {
+            "CHAR": {
+                "type": "String",
+                "import": "java.lang.String"
+            },
+            "NCHAR": {
+                "type": "String",
+                "import": "java.lang.String"
+            },
+            "VARCHAR2": {
+                "type": "String",
+                "import": "java.lang.String"
+            },
+            "NVARCHAR2": {
+                "type": "String",
+                "import": "java.lang.String"
+            },
+            "LONG": {
+                "type": "String",
+                "import": "java.lang.String"
+            },
+            "NUMBER": {
+                "type": "BigDecimal",
+                "import": "java.math.BigDecimal"
+            },
+            "DATE": {
+                "type": "Date",
+                "import": "java.util.Date"
+            },
+            "TIMESTAMP": {
+                "type": "Timestamp",
+                "import": "java.sql.Timestamp"
+            },
+            "TIMESTAMP WITH TIME ZONE": {
+                "type": "Timestamp",
+                "import": "java.sql.Timestamp"
+            },
+            "TIMESTAMP WITH LOCAL TIME ZONE": {
+                "type": "Timestamp",
+                "import": "java.sql.Timestamp"
+            },
+            "INTERVAL YEAR TO MONTH": {
+                "type": "String",
+                "import": "java.lang.String"
+            },
+            "INTERVAL DAY TO SECOND": {
+                "type": "String",
+                "import": "java.lang.String"
+            },
+            "BINARY_FLOAT": {
+                "type": "Float",
+                "import": "java.lang.Float"
+            },
+            "BINARY_DOUBLE": {
+                "type": "Double",
+                "import": "java.lang.Double"
+            },
+            "RAW": {
+                "type": "byte[]",
+                "import": "java.lang.byte[]"
+            },
+            "LONG RAW": {
+                "type": "byte[]",
+                "import": "java.lang.byte[]"
+            },
+            "ROWID": {
+                "type": "String",
+                "import": "java.lang.String"
+            },
+            "UROWID": {
+                "type": "String",
+                "import": "java.lang.String"
+            },
+            "CLOB": {
+                "type": "String",
+                "import": "java.lang.String"
+            },
+            "NCLOB": {
+                "type": "String",
+                "import": "java.lang.String"
+            },
+            "BLOB": {
+                "type": "byte[]",
+                "import": "java.lang.byte[]"
+            },
+            "BFILE": {
+                "type": "String",
+                "import": "java.lang.String"
+            },
+            "XMLTYPE": {
+                "type": "String",
+                "import": "java.lang.String"
+            }
+        }
+    }
+]
