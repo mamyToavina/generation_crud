@@ -30,6 +30,21 @@
             }
         %>
     </table>
-    <a href="/[classNameLower]/insert_form">Ajouter un nouvel étudiant</a>
+    <a href="/[classNameLower]/insert_form">Ajouter un nouveau [classNameLower]</a>
+
+    <!-- Pagination -->
+    <div>
+    <%
+        int currentPage = (Integer) request.getAttribute("currentPage");
+        int totalPages = (Integer) request.getAttribute("totalPages");
+        String prevPage = currentPage > 0 ? "?page=" + (currentPage - 1) : "#";
+        String nextPage = currentPage < totalPages - 1 ? "?page=" + (currentPage + 1) : "#";
+    %>
+    <a href="<%= prevPage %>">Précédent</a>
+    <% for (int i = 0; i < totalPages; i++) { %>
+        <a href="?page=<%= i %>"><%= i + 1 %></a>
+    <% } %>
+    <a href="<%= nextPage %>">Suivant</a>
+</div>
 </body>
 </html>

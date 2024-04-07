@@ -1,0 +1,4 @@
+		<div class="form-group">
+     			<label for="[columnName]">[label]</label>
+     			<input type="[type]" class="form-control" id="[columnName]" name="[columnName]" value="${[tableName].[columnName]}" />
+		</div>

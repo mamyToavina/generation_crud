@@ -1,9 +1,10 @@
 		<label for="[label]">[label] :</label>
                 <select class="form-control" id="[label]" name="[label]">
                     <% List<[className]> [classNameLower]s = (List<[className]>) request.getAttribute("[classNameLower]s");
-                        if ([classNameLower]s != null) {
+		       [tableName] [tableNameLower] = ([tableName]) request.getAttribute("[tableNameLower]");
+                       if ([classNameLower]s != null) {
                             for ([className] [classNameLower] : [classNameLower]s) { %>
-                                    <option value="<%= [classNameLower].getId() %>"><%= [classNameLower].[methodLabel] %></option>
+                                    <option value="<%= [classNameLower].getId() %>"<%= ([tableNameLower].get[className]().getId().equals([classNameLower].getId())) ? "selected" : "" %>><%= 				    [classNameLower].[methodLabel] %></option>
                     <%      }
                         } %>
                 </select>

@@ -7,6 +7,10 @@
                 "type": "int",
                 "import": ""
             },
+            "float8": {
+                "type": "double",
+                "import": ""
+            },
             "varchar": {
                 "type": "String",
                 "import": ""
@@ -28,7 +32,7 @@
                 "import": "java.lang.Long"
             },
             "real": {
-                "type": "float",
+                "type": "double",
                 "import": ""
             },
             "double precision": {
@@ -36,11 +40,11 @@
                 "import": ""
             },
             "numeric": {
-                "type": "BigDecimal",
+                "type": "double",
                 "import": "java.math.BigDecimal"
             },
             "decimal": {
-                "type": "BigDecimal",
+                "type": "double",
                 "import": "java.math.BigDecimal"
             },
             "character varying": {
@@ -57,7 +61,7 @@
             },
             "date": {
                 "type": "Date",
-                "import": "java.util.Date"
+                "import": "java.sql.Date"
             },
             "time without time zone": {
                 "type": "Time",
@@ -151,7 +155,7 @@
             },
             "date": {
                 "type": "Date",
-                "import": "java.util.Date"
+                "import": "java.sql.Date"
             },
             "time": {
                 "type": "Time",
@@ -246,7 +250,7 @@
             },
             "DATE": {
                 "type": "Date",
-                "import": "java.util.Date"
+                "import": "java.sql.Date"
             },
             "TIMESTAMP": {
                 "type": "Timestamp",

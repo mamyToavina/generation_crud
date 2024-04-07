@@ -4,6 +4,7 @@
  */
 package codegenerator;
 
+import static codegenerator.Commande.generateOptions;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -22,6 +23,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 /**
@@ -76,7 +78,8 @@ public class CodeGenerator {
         return metadata;
     }
    
-    public static void generateClass(String className, String packageName, String databaseName, String template, String extension, String fileName, String basePath, Connection con) throws IOException, SQLException {
+   
+   public static void generateClass(String className, String packageName, String databaseName, String template, String extension, String fileName, String basePath, Connection con) throws IOException, SQLException {
         // Convertir le nom de la classe en majuscule
         String capitalizedClassName = fileName.substring(0, 1).toUpperCase() + fileName.substring(1);
         String code = generateCode(className, packageName, databaseName, template, con);
@@ -92,18 +95,22 @@ public class CodeGenerator {
         String classFilePath = packagePath + File.separator + capitalizedClassName + extension;
         File classFile = new File(classFilePath);
 
-        // Créer le fichier de classe s'il n'existe pas
-        if (!classFile.exists()) {
-            classFile.createNewFile();
-
-            // Écrire le contenu initial dans le fichier de classe
+        // Vérifier si le fichier existe
+        if (classFile.exists()) {
+            // Mettre à jour le contenu du fichier
             FileWriter writer = new FileWriter(classFile);
             writer.write(code);
             writer.close();
 
-            System.out.println("Class " + capitalizedClassName + " created in package " + packageName);
+            System.out.println("File " + capitalizedClassName + " updated in package " + packageName);
         } else {
-            System.out.println("Class " + capitalizedClassName + " already exists in package " + packageName);
+            // Si le fichier n'existe pas, le créer et écrire le contenu
+            classFile.createNewFile();
+            FileWriter writer = new FileWriter(classFile);
+            writer.write(code);
+            writer.close();
+
+            System.out.println("File " + capitalizedClassName + " created in package " + packageName);
         }
     }
 
@@ -143,6 +150,7 @@ public class CodeGenerator {
 
         // Construire l'espace d'importation
         String importSpace = generateImportSpace(metadata, types);
+        String importVue = Vue.generateImportVue(metadata, types);
 
         // Construire la déclaration des champs
         String fieldsDeclaration = generateFieldsDeclaration(metadata, types);
@@ -155,6 +163,7 @@ public class CodeGenerator {
         String otherRepositoryDeclaration = otherRepositoryDeclaration(metadata, types);
         String importRepository = generateImportRepositoryDeclaration(metadata, types);
         String inputDeclaration = Vue.generateInput(removeWords(tableName), con);
+        String inputDeclarationUpdate = Vue.generateUpdateForm(removeWords(tableName), con);
         String thDeclaration = Vue.generateThead(tableName, con);
         String tdDeclaration = Vue.generateTd(tableName, con);
         
@@ -170,6 +179,7 @@ public class CodeGenerator {
         String generatedCode = templateContent.toString()
                 .replace("[packageName]", packageName)
                 .replace("[importSpace]", importSpace)
+                .replace("[importVue]", importVue)
                 .replace("[className]", removeWords(tableName).substring(0, 1).toUpperCase() + removeWords(tableName).substring(1))
                 .replace("[classNameLower]", removeWords(tableName).toLowerCase())
                 .replace("[fieldsDeclaration]", fieldsDeclaration)
@@ -182,14 +192,13 @@ public class CodeGenerator {
                 .replace("[otherRepositoryDeclaration]", otherRepositoryDeclaration )
                 .replace("[importRepository]", importRepository)
                 .replace("[inputDeclaration]", inputDeclaration)
+                .replace("[inputDeclarationUpdate]", inputDeclarationUpdate)
                 .replace("[theadDeclaration]", thDeclaration)
                 .replace("[tdDeclaration]", tdDeclaration)
                 .replace("[packageModel]", modelPackage)
                 .replace("[packageRepository]", repositoryPackage)
                 .replace("[settersDeclaration]", settersDeclaration);
 
-        // Vous devez remplacer les balises de remplacement restantes par les valeurs appropriées, 
-        // telles que les types de champs et les noms de champs, etc.
 
         return generatedCode;
     }
@@ -213,20 +222,26 @@ public class CodeGenerator {
     }
     
     public static void generateInsertionForm(String tableName, String packageName, String databaseName,String basePath, Connection con) throws IOException, SQLException {
-        String template = "insert.temp";
+        String template = "insert2.temp";
         String className = tableName.toLowerCase();
         generateClass(tableName, packageName, databaseName, template,".jsp","insert",basePath, con);
     }
     
+    public static void generateUpdate(String tableName, String packageName, String databaseName,String basePath, Connection con) throws IOException, SQLException {
+        String template = "update.temp";
+        String className = tableName.toLowerCase();
+        generateClass(tableName, packageName, databaseName, template,".jsp","update",basePath, con);
+    }
+    
     public static void generateList(String tableName, String packageName, String databaseName,String basePath, Connection con) throws IOException, SQLException {
-        String template = "liste.temp";
+        String template = "liste2.temp";
         String className = tableName.toLowerCase();
         generateClass(tableName, packageName, databaseName, template,".jsp","liste",basePath, con);
     }
     
     
     public static void generateCrud(String tableName) throws IOException, SQLException {
-        // Lire le fichier global_config.json
+        // Lire le fichier setup.json
         JsonParser parser = new JsonParser();
         JsonObject config = (JsonObject) parser.parse(new FileReader("setup.json"));
 
@@ -267,6 +282,8 @@ public class CodeGenerator {
 
         // Générer le formulaire d'insertion
         generateInsertionForm(tableName, tableName.toLowerCase(), databaseName, viewPath, con);
+        
+        generateUpdate(tableName, databaseName, databaseName, viewPath, con);
 
         // Générer la liste
         generateList(tableName, tableName.toLowerCase(), databaseName, viewPath, con);
@@ -513,7 +530,7 @@ public class CodeGenerator {
                 String fieldTypeName = types.getAsJsonObject(fieldType).get("type").getAsString();
                 varDeclaration.append("");
             } else {
-                varDeclaration.append("import "+repositoryPackage+"."+fieldType.substring(0, 1).toUpperCase() + fieldType.substring(1)+"Repository").append(";\n");
+                varDeclaration.append("import "+repositoryPackage+"."+fieldType.toLowerCase()+"."+fieldType.substring(0, 1).toUpperCase() + fieldType.substring(1)+"Repository").append(";\n");
             }
         }
         return varDeclaration.toString();
@@ -529,36 +546,6 @@ public class CodeGenerator {
         return input;
     }
     
-    /*public static HashMap<String, String> getFK(String tableName, Connection con) throws SQLException {
-        HashMap<String, String> foreignKeys = new HashMap<>();
-        DatabaseMetaData metaData = con.getMetaData();
-        ResultSet rs = metaData.getImportedKeys(con.getCatalog(), null, tableName);
-
-        while (rs.next()) {
-            String fkColumnName = rs.getString("FKCOLUMN_NAME");
-            String pkTableName = rs.getString("PKTABLE_NAME");
-            String pkColumnName = rs.getString("PKCOLUMN_NAME");
-
-            String label = getSecondColumnLabel(pkTableName, con);
-            foreignKeys.put(pkTableName, label);
-        }
-
-        return foreignKeys;
-    }
-
-    private static String getSecondColumnLabel(String tableName, Connection con) throws SQLException {
-        String label = "";
-        DatabaseMetaData metaData = con.getMetaData();
-        ResultSet rs = metaData.getColumns(con.getCatalog(), null, removeWords(tableName), null);
-
-        // Skip the first column (typically the primary key)
-        if (rs.next()) {
-            rs.next();
-            label = rs.getString("COLUMN_NAME");
-        }
-
-        return label;
-    }*/
     
     
     public static Map<String, String> getFieldsWithLabels(String tableName, Connection con) throws SQLException {
@@ -653,17 +640,59 @@ public class CodeGenerator {
         }
         return databaseJson;
     }
-
-
+    
     public static void main(String[] args) throws SQLException, IOException {
+       String fileName = "setup.json";
+
+        Scanner scanner = new Scanner(System.in);
+        Connection con = null;
+
         try {
-            Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5000/postgres", "postgres", "toavina");
-            //generateInsertionForm("article", "article","postgresql","D:/S6/code/spring mvc/test_projet/src/main/webapp/views", con);
-            generateCrud("poste");
-            //generateList("service", "ecole","postgresql","D:/S6/code/spring mvc/test_projet/src/main/webapp/views", con);
-           
-        } catch (SQLException e) {
+            // Menu principal
+            System.out.println("Menu:");
+            System.out.println("0 - Configurer l'environnement");
+            System.out.println("1 - Generer des codes");
+            System.out.print("Votre choix (ou tapez 'stop' pour quitter): ");
+
+            while (scanner.hasNext()) {
+                String input = scanner.next();
+
+                if (input.equalsIgnoreCase("stop")) {
+                    break;
+                }
+
+                int choix;
+                try {
+                    choix = Integer.parseInt(input);
+                } catch (NumberFormatException e) {
+                    System.out.println("Veuillez entrer un nombre valide ou 'stop' pour quitter.");
+                    continue;
+                }
+
+                switch (choix) {
+                    case 0:
+                        Initialisation.openInNotepad(fileName);
+                        break;
+                    case 1:
+                        generateOptions(scanner);
+                        break;
+                    default:
+                        System.out.println("Choix invalide.");
+                }
+
+                System.out.print("Votre choix (ou tapez 'stop' pour quitter): ");
+            }
+        } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            scanner.close();
         }
     }
     
